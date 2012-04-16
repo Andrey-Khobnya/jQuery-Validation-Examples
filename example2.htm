@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>Validate Example 2</title>
+	<link href="styles.css" rel="stylesheet" type="text/css" />
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+	<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
+</head>
+<body>
+	<form name="userMail" id="userMailForm">
+		<div><label for="realName">Name</label></div>
+		<div><input type="text" name="realName"/></div>
+		<div><label for="email">E-Mail</label></div>
+		<div><input type="text" name="email" /></div>
+		<div><label for="serial">Serial No</label></div>
+		<div><input type="text" name="serial" /></div>
+		<div><input type="submit" id="submitButton" value="Send" disabled />
+	</form>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			var formValidator = $('#userMailForm').validate({
+					rules: {
+						realName: {
+							required: true,
+							minlength: 2
+						},
+						email: {
+							required: true,
+							email: true
+						},
+						serial: {
+							required: true,
+							digits: true,
+							minlength: 8,
+							maxlength: 8
+						}
+						
+					},
+					onfocusout: false,
+					onkeyup: false,
+					onsubmit: false,
+					onclick: false
+			});
+			
+			$('#userMailForm input').keyup(function() {
+				if(formValidator.checkForm()) {
+					$('#submitButton').removeAttr("disabled");
+				} else {
+					$('#submitButton').attr("disabled", "disabled");
+				}
+			});
+			
+			$('input[name="realName"], input[name="email"]').focusout(function() {
+				$(this).valid();
+			});
+			
+			$('input[name="serial"]').keyup(function() {
+				$(this).valid();
+			});
+		});
+	</script>
+</body>
+</html>

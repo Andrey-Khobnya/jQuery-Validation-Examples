@@ -1,0 +1,1 @@
+This examples show how you can control validation logic of jQuery Validation plugin manually. For example, such a flexible approach allows you to validate different fields on different events or to handle event when all fields of form are valid.
